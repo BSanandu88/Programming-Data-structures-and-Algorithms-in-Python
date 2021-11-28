@@ -19,3 +19,28 @@ def toposort(AMat):
             if AMat[j,k] == 1:
                 indegree[k] = indegree[k] - 1
     return (toposortlist)
+
+# topo sort using adjacency list
+
+def toposortlist(AList):
+    (indegree,toposortlist) = ({},[])
+    for u in AList.keys():
+        indegree[u] = 0
+    for u in AList.keys():
+        for v in AList[u]:
+            indegree[v] = indegree[v] + 1
+    
+    zerodegreeq = Queue()
+    for u in AList.keys():
+        if indegree[u] == 0:
+            zerodegreeq.addq(u)
+    
+    while (not zerodegreeq.isempty()):
+        j = zerodegreeq.delq()
+        toposortlist.append(j)
+        indegree[j] = indegree[j] - 1
+        for k in AList[j]:
+            indegree[k] = indegree[k] - 1
+            if indegree[k] == 0:
+                zerodegreeq.addq(k)
+    return (toposortlist)
