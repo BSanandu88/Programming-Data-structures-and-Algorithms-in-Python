@@ -21,6 +21,7 @@ def toposort(AMat):
     return (toposortlist)
 
 # topo sort using adjacency list
+import queue
 
 def toposortlist(AList):
     (indegree,toposortlist) = ({},[])
@@ -30,7 +31,7 @@ def toposortlist(AList):
         for v in AList[u]:
             indegree[v] = indegree[v] + 1
     
-    zerodegreeq = Queue()
+    zerodegreeq = queue()
     for u in AList.keys():
         if indegree[u] == 0:
             zerodegreeq.addq(u)
