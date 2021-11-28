@@ -23,3 +23,39 @@ print(q.isempty())
 for j in range(3):
     print(q.delq(),q)
 print(q.isempty())
+
+# BREADTH FIRST SEARCH
+
+
+def BFS(Amat,v):
+    (rows,cols) = Amat.shape
+    visited = {}
+    for i in range(rows):
+        visited[i] = False
+    q = Queue()
+    visited[v] = True
+    q.addq(v)
+
+    while (not q.isempty()):
+        j = q.delq()
+        for k in neighbours(Amat,j):
+            if (not visited[k]):
+                visited[k] = True
+                q.addq(k)
+    return(visited)
+
+def BFSList(AList,v):   # Adjacency list 
+    visited = {}
+    for i in AList.keys():
+        visited[i] = False
+    q = Queue()
+    visited[v] = True
+    q.addq(v)
+    while(not q.isempty()):
+        j = q.delq()
+        for k in AList[j]:
+            if(not visited[k]):
+                visited[k] = True
+                q.addq(k)
+
+    return(visited)
