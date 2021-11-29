@@ -2,7 +2,7 @@
 import numpy as np
 
 def dijkstra(WMat,s):
-    (rows,cols,x) = WMat.shape
+    (rows,cols,x) = (WMat.shape)
     infinity = np.max(WMat) * rows + 1 
     (visited,distance) = ({},{})
     for v in range(rows):
@@ -21,3 +21,5 @@ def dijkstra(WMat,s):
             if WMat[nextv,v,0] == 1 and (not visited[v]):
                 distance[v] = min(distance[v],distance[nextv] + WMat[nextv,v,1])
     return(distance)
+
+
