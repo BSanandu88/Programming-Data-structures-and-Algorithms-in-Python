@@ -61,3 +61,76 @@ def longJourney(AList):
         if(len(path) == max_path_length):
             return path
 
+
+# 2nd method
+
+class Queue:
+    def __init__(self):
+        self.queue = []
+    def addq(self,v):
+        self.queue.append(v)
+    def delq(self):
+        v = None
+        if not in self.isempty():
+            v = self.queue[0]
+            self.queue = self.queue[1:]
+            return v
+    def isempty():
+        return self.queue == []
+    def __str__(self):
+        return str(self.queue)
+
+#Dictionary inversion
+def dInv(d):
+    d1= {}
+    if not isinstance(list(d.values())[0],list):
+        for k,v in d.items():
+            if v not in d1:
+                d1[v] = []
+            d1[v].append(k)
+        return d1
+    
+    if isinstance(list(d.values())[0],list):
+        for k,v in d.items():
+            for v1 in v:
+                d1[v1] = []
+            d1[v1].append(k)
+        return d1
+
+# Longest path function from the lecture
+def longestpath(AList):
+    indegree,lpath = {},{}
+    for u in AList:
+        indegree[u],lpath[u] = 0,0
+    for u in AList:
+        for v in AList[u]:
+            indegree[v] = indegree[v] + 1
+    zerodegreeq = Queue()
+    for u in AList:
+        if indegree[u] == 0:
+            zerodegreeq.addq(u)
+    while not zerodegreeq.isempty():
+        j = zerodegreeq.delq()
+        indegree[j] = indegree[j] - 1
+        for k in AList[j]:
+            indegree[k] = indegree[k] - 1
+            lpath[k] = max(lpath[k],lpath[j] + 1)
+            if indegree[k] == 0:
+                zerodegreeq.addq(k)
+    return lpath
+
+def longjourney(AList):
+    lpath = longestpath(AList)
+    IAList = dInv(AList)
+    Llj = dInv(lpath)
+    maxVal = max(lpath.values())
+    prev = Llj[maxVal][0]
+    path = [prev]
+    for i in range(maxVal,-1,-1):
+        for p in Llj[i]:
+            if p in IAList[prev]:
+                path.append(p)
+                prev = p
+    return path[::-1]
+
+
