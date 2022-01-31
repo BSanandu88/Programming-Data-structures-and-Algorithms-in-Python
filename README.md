@@ -1,2 +1,4 @@
-# Programming-Data-structures-and-Algorithms-in-Python
-PDSA
+# Problem Solving in C++ and Python
+ - Leetcode
+ - GeeksforGeeks
+ - Codeforces
